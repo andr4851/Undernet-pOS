@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Retroworks/Core/TestScenes/Desktop.unity
+- path: Assets/Retroworks/Core/TestScenes/TerminalOnly.unity
   isLoaded: 1
   isActive: 1

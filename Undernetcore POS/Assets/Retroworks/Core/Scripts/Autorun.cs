@@ -27,10 +27,13 @@ public class Autorun : MonoBehaviour {
 			Terminal term = GetComponent<Terminal>();
 			foreach (string text in lines)
 			{
-				
-				term.AutorunOrScript = true;
-				term.com = text;
-				term.Enter();
+
+				if (text[0] != '%')
+				{
+					term.AutorunOrScript = true;
+					term.com = text;
+					term.Enter();
+				}
 				if (leah > lines.Length) 
 				{
 					term.com = String.Empty;

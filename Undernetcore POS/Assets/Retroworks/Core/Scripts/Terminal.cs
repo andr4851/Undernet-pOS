@@ -164,7 +164,7 @@ public class Terminal : MonoBehaviour {
 		}
 	}
 	//Create output
-	private void PreNext(){
+	public void PreNext(){
 		ActOut = Instantiate (Output);
 		ActOut.transform.SetParent (Main);
 		ActOut.transform.localScale = new Vector3 (1, 1, 1);
@@ -544,6 +544,35 @@ public class Terminal : MonoBehaviour {
 						ErrorStop = true;
 						break;
 
+				}
+				break;
+			case "setupLoader":
+				string FilePath = "/storage/emulated/0/Undernet/sys/Loader.usf";
+				switch (Splits[1]) 
+				{
+					
+					case "T":
+						File.WriteAllText(FilePath, "[TypeOfLoad]\nNoShowTextOrGraficalInformation\n[Mode]\nTerminalOnly");
+						next();
+						ErrorStop = true;
+						break;
+					case "X":
+						File.WriteAllText(FilePath, "[TypeOfLoad]\nNoShowTextOrGraficalInformation\n[Mode]\nWinMode");
+						next();
+						ErrorStop = true;
+						break;
+					case "NoSetup":
+						File.WriteAllText(FilePath, "[TypeOfLoad]\nNoShowTextOrGraficalInformation\n[Mode]\nNoSetup");
+						next();
+						ErrorStop = true;
+						break;
+					default:
+						PreNext();
+						OutputModule.text = "This argument is not found!";
+						OutputModule.color = Color.red;
+						next();
+						ErrorStop = true;
+						break;
 				}
 				break;
 		}

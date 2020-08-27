@@ -11,13 +11,18 @@ public class DesktopObject : MonoBehaviour {
 	
 	public Text clock;
 	public Slider sound;
+	public Image BattoryImg;
+	public Text BattoryText;
 	public GameObject Terminal, About;
 	public GameObject TermButton;
 	private Button[] MiniButa;
 	void Update() 
 	{
+		
 		clock.text = DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second + "\n" + DateTime.Now.Day + "/" + DateTime.Now.Month + "/" + DateTime.Now.Year;
 		AudioListener.volume = sound.value;
+		BattoryImg.fillAmount = SystemInfo.batteryLevel;
+		BattoryText.text = Convert.ToString(SystemInfo.batteryLevel * 100) + "%";
 	}
 	public void Quit() 
 	{
