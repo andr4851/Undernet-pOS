@@ -57,6 +57,7 @@
      <Compile Include="Assets\Retroworks\Core\Scripts\DesktopObject.cs" />
      <Compile Include="Assets\Retroworks\Core\Scripts\Loader.cs" />
      <Compile Include="Assets\Retroworks\Core\Scripts\SystemLog.cs" />
+     <Compile Include="Assets\Retroworks\Core\Scripts\SystemMonitorScript.cs" />
      <Compile Include="Assets\Retroworks\Core\Scripts\Terminal.cs" />
      <Compile Include="Assets\Retroworks\Core\Scripts\Window.cs" />
      <Compile Include="Assets\Retroworks\Core\Scripts\WindowResize.cs" />

@@ -8,14 +8,15 @@ public class Loader : MonoBehaviour {
 	string FilePath = "/storage/emulated/0/Undernet/sys/Loader.usf";
 	void Start () {
 		Terminal term = GetComponent<Terminal>();
+		term.AutorunOrScript = true;
 		if (!File.Exists(FilePath))
 		{
 			term.AutorunOrScript = true;
-			File.Create(FilePath);
+			File.WriteAllText(FilePath, "[TypeOfLoad]\nNoShowTextOrGraficalInformation\n[Mode]\nNoSetup");
 			term.PreNext();
 			term.OutputModule.text = "It's you first start app!\nFor configured loader input 'setupLoader' + 'T' or 'X'";
 			term.AutorunOrScript = false;
-			term.next();
+			term.Start();
 		}
 		else 
 		{
@@ -25,18 +26,18 @@ public class Loader : MonoBehaviour {
 				term.PreNext();
 				term.OutputModule.text = "You haven't configured the loader yet!\nFor configured loader input 'setupLoader' + 'T' or 'X'";
 				term.AutorunOrScript = false;
-				term.next();
+				term.Start();
 			}
 			else 
 			{
 				string[] memo = File.ReadAllLines(FilePath);
-				if (memo[3] == "TerminalOnly")
+				if (memo[3] == "NoSetup")
 				{
 					term.AutorunOrScript = true;
 					term.PreNext();
-					term.OutputModule.text = "You loader configurate to the terminal only mode";
+					term.OutputModule.text = "You haven't configured the loader yet!\nFor configured loader input 'setupLoader' + 'T' or 'X'";
 					term.AutorunOrScript = false;
-					term.next();
+					term.Start();
 				}
 				else if (memo[3] == "WinMode")
 				{

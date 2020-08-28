@@ -734,7 +734,7 @@ MonoBehaviour:
   OutputModule: {fileID: 0}
   com: 
   WindowMode: 0
-  AutorunOrScript: 0
+  AutorunOrScript: 1
 --- !u!114 &1482820469
 MonoBehaviour:
   m_ObjectHideFlags: 0

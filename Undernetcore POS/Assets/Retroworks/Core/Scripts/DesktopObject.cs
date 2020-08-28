@@ -13,7 +13,7 @@ public class DesktopObject : MonoBehaviour {
 	public Slider sound;
 	public Image BattoryImg;
 	public Text BattoryText;
-	public GameObject Terminal, About;
+	public GameObject Terminal, About, SystemMonitor;
 	public GameObject TermButton;
 	private Button[] MiniButa;
 	void Update() 
@@ -61,5 +61,19 @@ public class DesktopObject : MonoBehaviour {
 		});
 		ActAbout.GetComponent<Window>().MiniBut = MiniButa;
 
+	}
+	public void OpenSystemMonitor()
+	{
+		GameObject ActSysMon = Instantiate(SystemMonitor, WindowManager);
+		ActSysMon.transform.localScale = new Vector3(1, 1, 1);
+		GameObject ActButs = Instantiate(TermButton, ButtonManager);
+		MiniButa = ActButs.GetComponentsInChildren<Button>();
+		MiniButa[0].onClick.AddListener(delegate {
+			ActSysMon.SetActive(true);
+		});
+		MiniButa[1].onClick.AddListener(delegate {
+			ActSysMon.SetActive(false);
+		});
+		ActSysMon.GetComponent<Window>().MiniBut = MiniButa;
 	}
 }
