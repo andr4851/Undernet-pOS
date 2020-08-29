@@ -73,7 +73,7 @@ public class Terminal : MonoBehaviour {
 		//Output version of core
 		case "ver":
 				PreNext();
-				OutputModule.text = " version of system: 0.9.3 unstable \n version of core: 0.8 mod \n Distributive: Undernet pOS \n Code name: Skynet";
+				OutputModule.text = " version of system: 1.0 stable \n version of core: 0.8.1 mod \n Distributive: Undernet pOS \n Code name: Skynet";
 			if (AutorunOrScript == false)
 			{
 				next();

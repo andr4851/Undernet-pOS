@@ -1108,8 +1108,8 @@ MonoBehaviour:
     m_BestFit: 1
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 3
-    m_AlignByGeometry: 0
+    m_Alignment: 4
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -1353,8 +1353,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\t\t\t\t\tUndernet pOS\n\t\tPseudo Operation System\n\nVersion: 0.9.3 Unstable\nCore
-    version: 0.8 (mod)\nDistributive: Undernet pOS\nCodename: Skynet"
+  m_Text: "\t\t\t\t\tUndernet pOS\n\t\tPseudo Operation System\n\nVersion: 1.0 Stable\nCore
+    version: 0.8.3 (mod)\nDistributive: Undernet pOS\nCodename: Skynet"
 --- !u!114 &114557951263518206
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1628,7 +1628,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Undernet pOS 0.9.3
+  m_Text: Undernet pOS 1.0
 --- !u!114 &114807166261232864
 MonoBehaviour:
   m_ObjectHideFlags: 1
