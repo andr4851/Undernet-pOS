@@ -55,8 +55,9 @@ public class Autorun : MonoBehaviour {
 
 			}
 			Debug.Log(String.Join(" ", lines));
-		
+
 		}
+
 		
 	}
 	

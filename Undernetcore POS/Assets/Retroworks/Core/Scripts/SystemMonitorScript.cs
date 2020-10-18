@@ -8,13 +8,16 @@ public class SystemMonitorScript : MonoBehaviour
 
 	public Text DeviseInformation;
 	public Text CPULoad;
+	public Text RAMLoad;
 	public Text FPS;
 	public Text SoundLevel;
+	public Text MousePos;
 	public float updateInterval = 0.5F;
 	private double lastInterval;
 	private int frames = 0;
 	private float fps;
 	System.Diagnostics.PerformanceCounter cpuCounter;
+	System.Diagnostics.PerformanceCounter ramCounter;
 
 	void Start()
 	{
@@ -30,6 +33,8 @@ public class SystemMonitorScript : MonoBehaviour
 		cpuCounter.CounterName = "% Processor Time";
 		cpuCounter.InstanceName = "_Total";
 
+		ramCounter = new System.Diagnostics.PerformanceCounter("Memory", "Available MBytes");
+
 	}
 
 	// Update is called once per frame
@@ -37,8 +42,9 @@ public class SystemMonitorScript : MonoBehaviour
 	{
 		SoundLevel.text = System.Convert.ToString(AudioListener.volume * 100) + "%";
 		CPULoad.text = getCurrentCpuUsage();
+		RAMLoad.text = getAvailableRAM();
 
-
+		MousePos.text = Input.mousePosition.ToString(); ;
 		FPS.text = fps.ToString("f2");
 		++frames;
 		float timeNow = Time.realtimeSinceStartup;
@@ -52,6 +58,10 @@ public class SystemMonitorScript : MonoBehaviour
 	public string getCurrentCpuUsage()
 	{
 		return cpuCounter.NextValue() + "%";
+	}
+	public string getAvailableRAM()
+	{
+		return ramCounter.NextValue() + "MB";
 	}
 }
 

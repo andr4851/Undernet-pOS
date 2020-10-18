@@ -55,10 +55,14 @@ public class Window : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 		Destroy (Win);
 		Destroy (MiniBut[0].gameObject);
 	}
+	public void Full()
+	{
+		Win.GetComponent<RectTransform>();
+	}
 		
 	public void OnBeginDrag(PointerEventData eventData)
 	{
-		Alpfa.alpha = 0.6f;
+		GetComponent<Animator>().Play("StartDrag");
 		mouseStartingPos = Input.mousePosition;
 	}
 
@@ -78,7 +82,7 @@ public class Window : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHa
 	public void OnEndDrag(PointerEventData eventData)
 	{
 
-		Alpfa.alpha = 1;
+		GetComponent<Animator>().Play("EndDrag");
 		CheckOutScreen();
 
 	}

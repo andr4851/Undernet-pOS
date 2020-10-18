@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleFileBrowser.Runtime", "SimpleFileBrowser.Runtime.csproj", "{3825CE05-03CE-DFFF-040A-39B6DAF05D46}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{0BE201B5-0CBE-A98A-946D-3A08B02D8E0C}"
 EndProject
 Global
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3825CE05-03CE-DFFF-040A-39B6DAF05D46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3825CE05-03CE-DFFF-040A-39B6DAF05D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3825CE05-03CE-DFFF-040A-39B6DAF05D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3825CE05-03CE-DFFF-040A-39B6DAF05D46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0BE201B5-0CBE-A98A-946D-3A08B02D8E0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0BE201B5-0CBE-A98A-946D-3A08B02D8E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BE201B5-0CBE-A98A-946D-3A08B02D8E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU

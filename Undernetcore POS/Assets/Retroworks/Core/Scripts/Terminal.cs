@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.IO;
+using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,7 @@ public class Terminal : MonoBehaviour {
 	public GameObject Output;
 	public GameObject TermWin;
 	public RawImage BackGround;
+	public Color InpNameColor;
 	//Private objects
 	[HideInInspector]
 	public GameObject ActInp;
@@ -33,7 +36,6 @@ public class Terminal : MonoBehaviour {
 
 
 	//On start terminal else next enter
-
 	public void Start(){
 		if (AutorunOrScript == false)
 		{
@@ -41,6 +43,15 @@ public class Terminal : MonoBehaviour {
 			ActInp.transform.SetParent(Main);
 			ActInp.transform.localScale = new Vector3(1, 1, 1);
 			InpModule = ActInp.GetComponentInChildren<InputField>();
+			if (WindowMode != false)
+			{
+				string name = SystemInfo.deviceName + "@" + DesktopObject.dsk.UserName.text + ":";
+				ActInp.GetComponent<Text>().text = name;
+				ActInp.GetComponent<Text>().color = InpNameColor;
+			}
+			{
+
+			}
 			InpModule.onEndEdit.AddListener(delegate (string arg0)
 			{
 				Enter();
@@ -73,7 +84,7 @@ public class Terminal : MonoBehaviour {
 		//Output version of core
 		case "ver":
 				PreNext();
-				OutputModule.text = " version of system: 1.0 stable \n version of core: 0.8.1 mod \n Distributive: Undernet pOS \n Code name: Skynet";
+				OutputModule.text = " version of system: 2.0 stable \n version of core: 0.97 mod \n Distributive: Undernet pOS \n Code name: Arpanet";
 			if (AutorunOrScript == false)
 			{
 				next();
@@ -99,7 +110,8 @@ public class Terminal : MonoBehaviour {
 		case "dev":
 			PreNext ();
 			OutputModule.color = Color.green;
-			OutputModule.text = "Netreba Andrey: One programmer - One Developer";
+			OutputModule.text = "Netreba Andrey: Kernel and system developer \n" +
+					"Süleyman Yasir Kula: file manager developer";
 			if (AutorunOrScript == false)
 			{
 				next();
@@ -130,18 +142,39 @@ public class Terminal : MonoBehaviour {
 				OutputModule.text = "DateTime - this time \n" +
 					"LoadWinMode - load window mode \n" +
 	 "Mydevice - device information \n" +
-  "dev - developer \n" +
+  "dev - developers \n" +
   "ver - core version \n" +
   "quit - exit of app \n" +
   "exit - exit of terminal(Window mode only) \n" +
   "echo - you output in terminal \n" +
+  "whoami - Username of active user \n" +
   "math - simple calculater \n" +
   "file - work with file \n" +
-  "ColBack [color] - Background color(blue, red, green, black) or ColBack CustomImg [path]";
+  "ColBack [color] - Background color(blue, red, green, black) or ColBack CustomImg [path] \n" +
+  "downl [ulrFile] [FilePath] \n" +
+  "setupLoader [arg] need to setup applucation loader \n" +
+  "AddUser [Username] [password] - add user in system \n" +
+  "DeleteUser [Username] - delete user \n" +
+  "StartError [title(One word only!)] [memo] - open error window with your title and memo (Window mode only) \n" +
+  "whoami - Username (window mode only)";
 				next();
 				break;
+			case "whoami":
+				if (WindowMode != false) {
+					PreNext();
+					OutputModule.text = DesktopObject.dsk.UserName.text;
+					if (AutorunOrScript == false)
+						next();
+				}
+				else {
+					PreNext();
+					OutputModule.text = "root";
+					if (AutorunOrScript == false)
+						next();
+				}
+				break;
 			//If invalid command
-		default:
+			default:
 			if (ErrorStop == true){
 				ErrorStop = false;
 				break;
@@ -169,6 +202,12 @@ public class Terminal : MonoBehaviour {
 		ActOut.transform.SetParent (Main);
 		ActOut.transform.localScale = new Vector3 (1, 1, 1);
 		OutputModule = ActOut.GetComponent<Text> ();
+	}
+	public void OutputText(string text)
+	{
+		PreNext();
+		OutputModule.text = text;
+
 	}
 	//Next input
 	public void next(){
@@ -232,10 +271,40 @@ public class Terminal : MonoBehaviour {
 						break;
 					case "help":
 						PreNext();
-						OutputModule.text = "[Double] [operator] [Double] \n inf - information \n pi - pi number \n E - e number \n operators: +(plus), -(minus), *(multiplication), /(division), %(modulo divison) %%(persent)";
+						OutputModule.text = "[Double] [operator] [Double] \n inf - information \n pi - pi number \n E - e number\n LinearFunc(y=kx) - [k] [x] [operator(plus or minus)(optional)] [b(optional)] \n operators: +(plus), -(minus), *(multiplication), /(division), %(modulo divison) %%(persent)";
 						if (AutorunOrScript == false)
 						{
 							next();
+						}
+						break;
+					case "LinearFunc":
+						double k;
+						double x;
+						double b;
+						k = Convert.ToDouble(Splits[2]);
+						x = Convert.ToDouble(Splits[3]);
+						
+						double preFinal = k * x;
+						if(Splits[5] != null)
+						{
+							if (Splits[4] == "-")
+							{
+								b = Convert.ToDouble(Splits[5]);
+								PreNext();
+								OutputModule.text = "x = " + x.ToString() + "\n y = " + Convert.ToString(preFinal - b);
+								ErrorStop = true;
+								next();
+								
+							}
+							else if (Splits[4] == "+")
+							{
+								b = Convert.ToDouble(Splits[5]);
+								PreNext();
+								OutputModule.text = "x = " + x.ToString() + "\n y = " + Convert.ToString(preFinal + b);
+								ErrorStop = true;
+								next();
+
+							}
 						}
 						break;
 
@@ -340,6 +409,8 @@ public class Terminal : MonoBehaviour {
 								}
 								break;
 							case "script":
+								GetComponent<TerminalScripting>().path = Splits[3];
+								GetComponent<TerminalScripting>().OpenScript();
 								break;
 						}
 						break;
@@ -464,7 +535,7 @@ public class Terminal : MonoBehaviour {
 						{
 							ThisDir = new DirectoryInfo(newpath);
 						}
-						catch (DirectoryNotFoundException)
+						catch (Exception)
 						{
 							PreNext();
 							OutputModule.color = Color.red;
@@ -552,17 +623,17 @@ public class Terminal : MonoBehaviour {
 				{
 					
 					case "T":
-						File.WriteAllText(FilePath, "[TypeOfLoad]\nNoShowTextOrGraficalInformation\n[Mode]\nTerminalOnly");
+						File.WriteAllText(FilePath, "[TypeOfLoad]\nTextInfo\n[Mode]\nTerminalOnly");
 						next();
 						ErrorStop = true;
 						break;
 					case "X":
-						File.WriteAllText(FilePath, "[TypeOfLoad]\nNoShowTextOrGraficalInformation\n[Mode]\nWinMode");
+						File.WriteAllText(FilePath, "[TypeOfLoad]\nTextInfo\n[Mode]\nWinMode");
 						next();
 						ErrorStop = true;
 						break;
 					case "NoSetup":
-						File.WriteAllText(FilePath, "[TypeOfLoad]\nNoShowTextOrGraficalInformation\n[Mode]\nNoSetup");
+						File.WriteAllText(FilePath, "[TypeOfLoad]\nTextInfo\n[Mode]\nNoSetup");
 						next();
 						ErrorStop = true;
 						break;
@@ -575,6 +646,71 @@ public class Terminal : MonoBehaviour {
 						break;
 				}
 				break;
+			case "AddUser":
+				string usrPath = "/storage/emulated/0/Undernet/usr";
+				Directory.CreateDirectory(usrPath + "/" + Splits[1]);
+				string file = "[asses]\nBaseUser\n[password]\n" + Splits[2];
+				File.WriteAllText(usrPath + "/" + Splits[1] + "/" + "UserData.uud", file);
+				File.CreateText(usrPath + "/" + Splits[1] + "/" + "DesktopSettings.usf");
+				ErrorStop = true;
+				next();
+				break;
+			case "DeleteUser":
+				usrPath = "/storage/emulated/0/Undernet/usr";
+				string[] DelsFiles = Directory.GetFiles(usrPath + "/" + Splits[1]);
+				PreNext();
+				OutputModule.text = String.Empty;
+				for (int i = 0; i < DelsFiles.Length; i++)
+				{
+					OutputText("Delete file in this path: " + DelsFiles[i]);
+					File.Delete(DelsFiles[i]);
+				}
+				Directory.Delete(usrPath + "/" + Splits[1]);
+				ErrorStop = true;
+				OutputText("User " + Splits[1] + " now was been deleting!");
+				next();
+				break;
+			case "downl":
+				string urlPath = Splits[1];
+				string Path = Splits[2];
+				StartCoroutine(Downloader(urlPath, Path));
+				ErrorStop = true;
+				break;
+			case "StartError":
+				if (WindowMode == true)
+				{
+					string title = Splits[1];
+					Splits[0] = String.Empty;
+					Splits[1] = String.Empty;
+					string memo = String.Join(" ", Splits);
+					ErrorsLogic.ERRLog.ErrorStart(title, memo);
+					if (AutorunOrScript == false)
+						next();
+					ErrorStop = true;
+				}
+				else
+				{
+					PreNext();
+					OutputModule.text = "You in terminal only mode!";
+					OutputModule.color = Color.red;
+					if(AutorunOrScript == false)
+						next();
+					ErrorStop = true;
+				}
+				break;
 		}
 	}
+	IEnumerator Downloader(string url, string path)
+	{
+		WebClient webClient = new WebClient();
+		webClient.Headers.Add(HttpRequestHeader.UserAgent, "Other");
+		webClient.Headers.Add(HttpRequestHeader.Accept, "applucation/pdf");
+		OutputText("Downloading file from " + url + " to " + path);
+		webClient.DownloadFile(url, path);
+		OutputText("File download to " + path);
+		if(AutorunOrScript != false)
+			next();
+		yield return null;
+	}
 }
+

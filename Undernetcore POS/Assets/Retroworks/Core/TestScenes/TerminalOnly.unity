@@ -189,7 +189,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 431452255}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: /storage/emulated/0/Undernet/sys
-  Filepath: /storage/emulated/0/Undernet/sys/autorun.usf
+  Filepath: /storage/emulated/0/Undernet/sys/TerminalAutorun.usf
   lines: []
 --- !u!114 &1482820474
 MonoBehaviour:
@@ -838,7 +838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   path: /storage/emulated/0/Undernet/sys
-  filePath: /storage/emulated/0/Undernet/sys/SystemLog.log
+  filePath: /storage/emulated/0/Undernet/sys/TerminalLog.log
 --- !u!114 &1482820475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1137,7 +1137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000024795532, y: 0.000039536477}
+  m_AnchoredPosition: {x: 0.000024795532, y: -0.00002149868}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1974425837

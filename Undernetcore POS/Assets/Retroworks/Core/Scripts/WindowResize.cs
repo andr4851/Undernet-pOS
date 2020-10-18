@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-public class WindowResize : MonoBehaviour, IPointerDownHandler, IDragHandler
+public class WindowResize : MonoBehaviour, IPointerDownHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
 
     public Vector2 minSize;
@@ -23,6 +23,10 @@ public class WindowResize : MonoBehaviour, IPointerDownHandler, IDragHandler
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform, data.position, data.pressEventCamera, out previousPointerPosition);
     }
 
+   public void OnBeginDrag(PointerEventData eventData)
+    {
+        GetComponentInParent<Animator>().Play("StartDrag");
+    }
     public void OnDrag(PointerEventData data)
     {
         if (rectTransform == null)
@@ -42,5 +46,9 @@ public class WindowResize : MonoBehaviour, IPointerDownHandler, IDragHandler
         rectTransform.sizeDelta = sizeDelta;
 
         previousPointerPosition = currentPointerPosition;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        GetComponentInParent<Animator>().Play("EndDrag");
     }
 }
