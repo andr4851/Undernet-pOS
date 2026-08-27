@@ -1,5 +1,5 @@
 # Undernet pOS
-That project were created as a study one by me for researching the Unity API and code system. That was a try to create something like operation system, based on unity
+Experimental Unity project: a desktop-OS-like shell built on top of the Unity API
 
 ## Features
 In that project was created:
